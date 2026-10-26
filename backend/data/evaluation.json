@@ -1,0 +1,147 @@
+{
+  "extraction": {
+    "labeled": 50,
+    "hit": 50,
+    "missed_labels": [],
+    "expected_misses_still_missing": [
+      "People and technology"
+    ],
+    "expected_misses_that_were_extracted": [],
+    "intentional_structural_misses": [
+      {
+        "label": "People-and-technology line on the call",
+        "quote": "That combination of people and technology has always been central to Schwab and cannot be underestimated.",
+        "why": "No figure and no cash, sweep, or agent keyword, so the code filter never emits it."
+      },
+      {
+        "label": "Sweep cash excluding short credits fell $12.5 billion, as a Schwab sentence",
+        "quote": "sweep cash excluding short credits fell $12.5 billion",
+        "why": "Schwab does not say this. The finance tab recomputes it from the June and September releases. Extraction correctly does not invent it."
+      }
+    ],
+    "unlabeled_extras": [],
+    "precision_against_labels": 1.0,
+    "recall_against_labels": 1.0,
+    "claims": 51,
+    "edges": 98,
+    "chunks": 17,
+    "extract_seconds": 0.006
+  },
+  "seeded_errors": {
+    "planted": 12,
+    "caught_by_code": 11,
+    "not_caught": [
+      {
+        "id": "e-entail",
+        "label": "Real quote, conclusion the quote does not support",
+        "failed_checks": [],
+        "needs_nim": true,
+        "why": "Code checks pass. This one needs the NIM entailment pass. Without a key it is not caught."
+      }
+    ],
+    "catch_rate_including_nim_gap": 0.917,
+    "detail": [
+      {
+        "id": "e-month",
+        "label": "Wrong month",
+        "failed_checks": [
+          "quote"
+        ],
+        "needs_nim": false
+      },
+      {
+        "id": "e-subset",
+        "label": "Subset presented as the total",
+        "failed_checks": [
+          "scope"
+        ],
+        "needs_nim": false
+      },
+      {
+        "id": "e-peer",
+        "label": "Peer claim attributed to Schwab",
+        "failed_checks": [
+          "company"
+        ],
+        "needs_nim": false
+      },
+      {
+        "id": "e-misquote",
+        "label": "Misquote",
+        "failed_checks": [
+          "numbers",
+          "quote"
+        ],
+        "needs_nim": false
+      },
+      {
+        "id": "e-after",
+        "label": "Source after the as-of date",
+        "failed_checks": [
+          "as_of"
+        ],
+        "needs_nim": false
+      },
+      {
+        "id": "e-tolerance",
+        "label": "Number outside tolerance",
+        "failed_checks": [
+          "numbers"
+        ],
+        "needs_nim": false
+      },
+      {
+        "id": "e-rjf",
+        "label": "Raymond James balance attributed to Schwab",
+        "failed_checks": [
+          "company",
+          "hedge"
+        ],
+        "needs_nim": false
+      },
+      {
+        "id": "e-not-in-source",
+        "label": "Quote absent from the source",
+        "failed_checks": [
+          "quote"
+        ],
+        "needs_nim": false
+      },
+      {
+        "id": "e-direction",
+        "label": "Wrong direction on a real number",
+        "failed_checks": [
+          "quote"
+        ],
+        "needs_nim": false
+      },
+      {
+        "id": "e-ai-flip",
+        "label": "AI cash claim reversed",
+        "failed_checks": [
+          "quote"
+        ],
+        "needs_nim": false
+      },
+      {
+        "id": "e-hedge",
+        "label": "Secondary claim without a hedge",
+        "failed_checks": [
+          "hedge"
+        ],
+        "needs_nim": false
+      }
+    ]
+  },
+  "baseline_versus_pipeline": {
+    "note": "No model was called. Latency of a live one-prompt baseline was not measured.",
+    "pipeline_llm_calls_in_this_script": 0,
+    "pipeline_code_latency_seconds": 0.006,
+    "baseline_shape": "one prompt over the whole cache, no code checks before the answer",
+    "baseline_prompt_tokens_estimate": 2164,
+    "baseline_seeded_errors_that_would_ship": 12,
+    "same_errors_caught_once_the_verifier_runs": 11,
+    "tradeoff": "A one-prompt baseline is one call. It does not run the six code checks, so the seeded errors ship. The pipeline's catch rate is the code checks. Speed without those checks is a real tradeoff, not a win."
+  },
+  "finance_recompute_billion": 12.5
+}

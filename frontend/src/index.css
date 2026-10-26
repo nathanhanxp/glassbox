@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 500px at 10% -10%, rgba(196, 164, 116, 0.35), transparent 50%),
+    #f3ecdf;
+  color: #2c241c;
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+}
+
+button, input, textarea {
+  font-family: inherit;
+}
+
+.stage {
+  background:
+    radial-gradient(900px 420px at 50% 110%, rgba(166, 124, 74, 0.18), transparent 55%),
+    linear-gradient(180deg, #241c16 0%, #16110e 100%);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #d9cbb6; border-radius: 99px; }
